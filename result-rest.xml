@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="2" time="4.018" timestamp="2026-04-19T12:08:05.777646+02:00" hostname="Andres"><testcase classname="test.rest.api_test.TestApi" name="test_api_add" time="2.115" /><testcase classname="test.rest.api_test.TestApi" name="test_api_sqrt" time="1.245"><failure message="urllib.error.HTTPError: HTTP Error 404: Not Found">self = &lt;rest.api_test.TestApi testMethod=test_api_sqrt&gt;
+
+    def test_api_sqrt(self):
+        url = f"{BASE_URL_MOCK}/calc/sqrt/64"
+&gt;       response = urlopen(url, timeout=DEFAULT_TIMEOUT)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test\rest\api_test.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Program Files\Python313\Lib\urllib\request.py:189: in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Program Files\Python313\Lib\urllib\request.py:495: in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+C:\Program Files\Python313\Lib\urllib\request.py:604: in http_response
+    response = self.parent.error(
+C:\Program Files\Python313\Lib\urllib\request.py:533: in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+C:\Program Files\Python313\Lib\urllib\request.py:466: in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;urllib.request.HTTPDefaultErrorHandler object at 0x000001EAAFF4E3C0&gt;
+req = &lt;urllib.request.Request object at 0x000001EAB0070190&gt;
+fp = &lt;http.client.HTTPResponse object at 0x000001EAB004CAF0&gt;, code = 404
+msg = 'Not Found', hdrs = &lt;http.client.HTTPMessage object at 0x000001EAB0028E90&gt;
+
+    def http_error_default(self, req, fp, code, msg, hdrs):
+&gt;       raise HTTPError(req.full_url, code, msg, hdrs, fp)
+E       urllib.error.HTTPError: HTTP Error 404: Not Found
+
+C:\Program Files\Python313\Lib\urllib\request.py:613: HTTPError</failure></testcase></testsuite></testsuites>
