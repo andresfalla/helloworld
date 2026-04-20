@@ -1,0 +1,46 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Get Code') {
+            steps {
+                // Obtener código del repo
+                git 'https://github.com/andresfalla/helloworld'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'eyy, esto es Python, no hay que compilar nada'
+                echo WORKSPACE
+                bat 'dir'
+            }
+        }
+		
+		stage('Test') {
+            parallel {
+				stage('Unit') {
+					steps {
+						//esto es para capturar errores y que diga donde se ha producido el error
+						catchError(buildResult: 'SUCCESS',  stageResult: 'FAILURE'){
+							bat '''
+								set PYTHONPATH=%WORKSPACE%
+								pytest --junitxml=result-unit.xml test\\unit
+							'''
+						}
+					}
+				}
+				
+				
+               
+            }
+        }
+		
+		stage('Results') {
+            steps {
+                junit 'result*.xml'
+            }
+        }
+    }
+}
